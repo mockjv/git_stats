@@ -3,6 +3,13 @@
 GitStats is a git repository statistics generator.
 It browses the repository and outputs html page with statistics.
 
+## what added in this folk
+Add Dockerfile to automatically build image for CI tools.
+
+Usage:
+
+    $ docker run --rm -v GIT_PATH:/git:ro -v OUTPUT_PATH:/gitstats goodideal/docker-git-stats:latest
+
 ## Examples
 * [devise](http://tomgi.github.com/git_stats/examples/devise/index.html)
 * [devise_invitable](http://tomgi.github.com/git_stats/examples/devise_invitable/index.html)
