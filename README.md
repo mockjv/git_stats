@@ -8,7 +8,11 @@ Add Dockerfile to automatically build image for CI tools.
 
 Usage:
 
-    $ docker run --rm -v <GIT_PATH>:/git:ro -v <OUTPUT_PATH>:/gitstats --env PROJECT_NAME=<PROJECT_NAME> mock/docker-git-stats:latest
+    $ docker run --rm -v \
+        <GIT_PATH>:/git:ro -v \
+        <OUTPUT_PATH>:/gitstats \
+        --env PROJECT_NAME=<PROJECT_NAME> \
+        mock/docker-git-stats:latest
 
 ## Examples
 * [devise](http://tomgi.github.com/git_stats/examples/devise/index.html)
