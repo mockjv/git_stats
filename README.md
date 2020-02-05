@@ -8,7 +8,7 @@ Add Dockerfile to automatically build image for CI tools.
 
 Usage:
 
-    $ docker run --rm -v GIT_PATH:/git:ro -v OUTPUT_PATH:/gitstats goodideal/docker-git-stats:latest
+    $ docker run --rm -v <GIT_PATH>:/git:ro -v <OUTPUT_PATH>:/gitstats --env PROJECT_NAME=<PROJECT_NAME>     mock/docker-git-stats:latest
 
 ## Examples
 * [devise](http://tomgi.github.com/git_stats/examples/devise/index.html)
@@ -62,6 +62,8 @@ Usage:
                                                 # Default: .
       c, [--comment-string=COMMENT_STRING]      # The string which is used for comments.
                                                 # Default: //
+      n, [--name=PROJECT_NAME]                  # Specifies the project name
+                                                # Default: name of the project dir
 
     Generates the statistics of a repository
 
