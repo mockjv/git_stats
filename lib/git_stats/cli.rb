@@ -11,6 +11,7 @@ class GitStats::CLI < Thor
   option :silent, :aliases => :s, :type => :boolean, :desc => 'Silent mode. Don\'t output anything.'
   option :tree, :aliases => :d, :default => '.', :desc => 'Tree where statistics should be generated.'
   option :comment_string, :aliases => :c, :default => '//', :desc => 'The string which is used for comments.'
+  option :name, :aliases => :n, :default => File.basename(File.expand_path('.')), :desc => 'The name of project.'
   
   desc 'generate', 'Generates the statistics of a repository'
   def generate
