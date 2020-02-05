@@ -9,7 +9,7 @@ module GitStats
     def parse_shortlog(result, params)
       result.lines.map do |line|
         commits, name, email = line.scan(/(.*)\t(.*)<(.*)>/).first.map(&:strip)
-        {commits: commits.to_i, name: name, email: email}
+        {commits: commits.to_i, name: name.downcase, email: email.downcase}
       end
     end
 
@@ -23,7 +23,7 @@ module GitStats
     def parse_rev_list(result, params)
       result.lines.map do |line|
         sha, stamp, date, author_email = line.split('|').map(&:strip)
-        {sha: sha, stamp: stamp, date: date, author_email: author_email}
+        {sha: sha, stamp: stamp, date: date, author_email: author_email.downcase}
       end
     end
 

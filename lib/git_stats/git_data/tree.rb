@@ -9,9 +9,11 @@ module GitStats
       attr_reader :repo, :relative_path
 
       def authors
-        @authors ||= run_and_parse("git shortlog -se #{commit_range}").map do |author|
-          Author.new(repo: self, name: author[:name], email: author[:email])
-        end
+        @authors ||= run_and_parse("git shortlog -se #{commit_range}").each{ |line| 
+          line[:name] = line[:name].downcase 
+          line[:email] = line[:email].downcase
+        }
+        .uniq.map { |author| Author.new(repo: self, name: author[:name], email: author[:email]) }
       end
       
       def ==(other)

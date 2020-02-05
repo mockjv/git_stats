@@ -40,13 +40,20 @@ module GitStats
       end
 
       def authors
-        @authors ||= run_and_parse("git shortlog -se #{commit_range} #{tree_path}").map do |author|
-          Author.new(repo: self, name: author[:name], email: author[:email])
-        end
+        @authors ||= run_and_parse("git shortlog -se #{commit_range} #{tree_path}")
+          .each{ |line| 
+            line[:name] = line[:name].downcase 
+            line[:email] = line[:email].downcase
+          }
+          .uniq { |author| [author[:name], author[:email]] }
+          .map { |author| 
+            puts "New author " + author.inspect
+            Author.new(repo: self, name: author[:name], email: author[:email]) }
       end
 
       def commits
         @commits ||= run_and_parse("git rev-list --pretty=format:'%H|%at|%ai|%aE' #{commit_range} #{tree_path} | grep -v commit").map do |commit_line|
+          commit_line[:author_email] = commit_line[:author_email].downcase
           Commit.new(
               repo: self,
               sha: commit_line[:sha],
